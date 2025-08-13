@@ -3,7 +3,7 @@
 </p>
 
 > [!CAUTION]
-> THIS PROJECT ONLY JUST STARTED NONE OF ADVERTISED FUNCTIONS ARE WORKING!
+> THIS PROJECT ONLY JUST STARTED! NONE OF ADVERTISED FUNCTIONS ARE WORKING!
 
 > [!WARNING]
 > This is absolutely not production ready this is only hobbyist project
@@ -23,8 +23,6 @@ A game engine that:
 
 ## Dependencies
 
-[SDL3](https://www.libsdl.org/)
-<br>
 [BuildIt](https://github.com/katusek1235/JustBuildIt)
 
 ## Quick Start

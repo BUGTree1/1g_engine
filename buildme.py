@@ -1,5 +1,6 @@
 create_vscode_settings = True
 run_after_build        = True
+build_type             = "executable"
 proj_name              = "1g engine"
 proj_version           = "0.1.0.0"
 file_name              = "1g"
@@ -11,6 +12,10 @@ linker_flags           = []
 output_path            = "bin"
 source_path            = "src"
 libs                   = []
-pkgconf_libs           = ["SDL3"]
+pkgconf_libs           = []
 lib_paths              = []
 include_paths          = []
+run_args               = []
+
+exec_postbuild         = []
+exec_prebuild          = []
