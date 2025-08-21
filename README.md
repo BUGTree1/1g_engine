@@ -23,7 +23,7 @@ A game engine that:
 
 ## Dependencies
 
-[BuildIt](https://github.com/katusek1235/JustBuildIt)
+[BuildIt](https://github.com/BUGTree1/JustBuildIt)
 
 ## Quick Start
 
