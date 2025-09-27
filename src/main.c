@@ -5,16 +5,15 @@
 
 #define DEBUG_FPS
 
+void debug_fps(double);
 #ifdef DEBUG_FPS
 #define FPS_INTERVAL 100
 size_t fps_count = 0;
 double FPS_avg_arr[FPS_INTERVAL];
 double FPS_avg = 0.0f;
-#endif
 
+#undef debug_fps
 void debug_fps(double delta_time){
-	#ifdef DEBUG_FPS
-
 	if(fps_count > FPS_INTERVAL) {
 		fps_count = 0;
 		FPS_avg = 0;
@@ -28,15 +27,14 @@ void debug_fps(double delta_time){
 		FPS_avg_arr[fps_count] = (1 / delta_time);
 		fps_count++;
 	}
-
-	#else
-	UNUSED(delta_time);
-	#endif
 }
+#else
+void debug_fps(double){
 
-int main(int argc, char *argv[]) {
-	UNUSED(argc);
-	UNUSED(argv);
-	
+}
+#endif
+
+int main(int, char **) {
+	debug_fps(1);
 	return 0;
 }
