@@ -8,6 +8,10 @@
 #include <SDL.h>
 #include <cglm/cglm.h>
 
+// ---------------------
+//  Dynamic Arrays
+// \/-------------------
+
 /* 
  EXAMPLE:
 
@@ -65,9 +69,21 @@ do {                                                                            
     }                                                                                      \
 } while(0)
 
+// ---------------------
+//  3d Math
+// \/-------------------
 
 float* rotate_3d_x(vec3 p, float angle);
 float* rotate_3d_y(vec3 p, float angle);
 float* rotate_3d_z(vec3 p, float angle);
+
+
+// ---------------------
+//  Logging
+// \/-------------------
+
+void error(const char* msg);
+void warning(const char* msg);
+void todo(const char* msg);
 
 #endif //__UTILS_H__
