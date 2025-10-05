@@ -25,6 +25,8 @@ A game engine that:
 
 [BuildIt](https://github.com/BUGTree1/JustBuildIt)
 
+Included [nob.h](https://github.com/tsoding/nob.h)
+
 Thanks to Alexey Kutepov (tsoding) for nob.h!
 
 ## Quick Start
