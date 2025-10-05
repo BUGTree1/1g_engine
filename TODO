@@ -1,5 +1,7 @@
-TODO:
-- choose rendering library
+DONE: 
+- choose rendering library (SDL2)
 - make a window
 - triangle
+
+TODO:
 - meshes (dynamic arrays of vertices and type etc)

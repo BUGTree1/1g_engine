@@ -25,6 +25,8 @@ A game engine that:
 
 [BuildIt](https://github.com/BUGTree1/JustBuildIt)
 
+Thanks to Alexey Kutepov (tsoding) for nob.h!
+
 ## Quick Start
 
 ```console

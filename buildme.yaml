@@ -13,7 +13,7 @@ linker_flags           : []
 output_dir             : "bin"
 source_dir             : "src"
 libs                   : []
-pkgconf_libs           : []
+pkgconf_libs           : ["SDL2", "cglm"]
 lib_dirs               : []
 include_dirs           : []
 run_args               : []
