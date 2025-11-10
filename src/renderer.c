@@ -1,4 +1,6 @@
 #include "renderer.h"
+#include "1g.h"
+#include "utils.h"
 
 void set_best_renderer_driver(SDL_Window* window) {
     //printf("Available renderers:\n");
@@ -29,7 +31,7 @@ void set_best_renderer_driver(SDL_Window* window) {
     }
 }
 
-renderer_data renderer_init() {
+renderer_data renderer_init(Scene* scene) {
     renderer_data data = {0, 0, 800, 600};
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -42,11 +44,15 @@ renderer_data renderer_init() {
     
     data.window = window;
     data.renderer = renderer;
+    data.scene = scene;
     
     return data;
 }
 
 void renderer_update(renderer_data data){
+    GameObject* go = get_gameobject(data.scene, 0);
+    Transform* transform = get_component(go, 0)->data;
+    Mesh* mesh = get_component(go, 1)->data;
 
     float size = 100.0f;
     float speed = 2.0f;
@@ -68,7 +74,7 @@ void renderer_update(renderer_data data){
     p2r = rotate_3d_x(p2r, data.time * speed);
     p3r = rotate_3d_x(p3r, data.time * speed);
 
-    data.draw.vertices = (SDL_Vertex[]){
+    mesh->vertices = (SDL_Vertex[]){
         { { center[0] + p1r[0], center[1] + p1r[1] }, { 255, 0, 0, 255 }, { 0.0f, 0.0f } },
         { { center[0] + p2r[0], center[1] + p2r[1] }, { 0, 255, 0, 255 }, { 0.0f, 0.0f } },
         { { center[0] + p3r[0], center[1] + p3r[1] }, { 0, 0, 255, 255 }, { 0.0f, 0.0f } }
@@ -76,7 +82,7 @@ void renderer_update(renderer_data data){
     
     SDL_SetRenderDrawColor(data.renderer, 0, 0, 0, 255);
     SDL_RenderClear(data.renderer);
-    SDL_RenderGeometry(data.renderer, NULL, data.draw.vertices, 3, NULL, 0);
+    SDL_RenderGeometry(data.renderer, NULL, mesh->vertices, 3, NULL, 0);
     SDL_RenderPresent(data.renderer);
 }
 

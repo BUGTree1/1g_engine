@@ -4,4 +4,7 @@ DONE:
 - triangle
 
 TODO:
+
+- REWRITE in c++ (11 or 17)
+
 - meshes (dynamic arrays of vertices and type etc)

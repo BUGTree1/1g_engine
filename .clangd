@@ -1,0 +1,5 @@
+CompileFlags:
+  Add:
+    - "-I/home/szyme/vcpkg/installed/x64-linux/lib/pkgconfig/../../include"
+    - "-I/home/szyme/vcpkg/installed/x64-linux/lib/pkgconfig/../../include/SDL2"
+    - "-I/home/szyme/vcpkg/installed/x64-linux/lib/pkgconfig/../../include"

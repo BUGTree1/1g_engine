@@ -1,9 +1,22 @@
-
+#include "1g.h"
 #define NOB_IMPLEMENTATION
 #include "renderer.h"
 
+
 int main(int argc, char** argv) {
-	renderer_data rend_data = renderer_init();
+	Scene* scene = (Scene*)malloc(sizeof(Scene));
+
+    da_append(&scene->gameobjects, (GameObject){0});
+
+    da_append(&get_gameobject(scene, 0)->components, (Component){0});
+    get_component(get_gameobject(scene, 0), 0)->type = 0;
+    get_component(get_gameobject(scene, 0), 0)->data = &(Transform){0};
+
+    da_append(&get_gameobject(scene, 0)->components, (Component){0});
+    get_component(get_gameobject(scene, 0), 1)->type = 1;
+    get_component(get_gameobject(scene, 0), 1)->data = &(Mesh){0};
+
+	renderer_data rend_data = renderer_init(scene);
 	renderer_update(rend_data);
 
     double last_time = 0;

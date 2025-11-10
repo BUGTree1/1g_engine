@@ -2,13 +2,7 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include <stdio.h>
-#include <stdbool.h>
-#include "utils.h"
-
-typedef struct {
-    SDL_Vertex* vertices;
-} draw_data;
+#include "1g.h"
 
 typedef struct {
     SDL_Window* window;
@@ -21,10 +15,10 @@ typedef struct {
     double delta_time;
     double time;
 
-    draw_data draw;
+    Scene* scene;
 } renderer_data;
 
-renderer_data renderer_init();
+renderer_data renderer_init(Scene* scene);
 void renderer_update(renderer_data data);
 void renderer_end(renderer_data data);
 

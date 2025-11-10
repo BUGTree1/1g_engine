@@ -5,6 +5,8 @@
 #define NOB_STRIP_PREFIX
 #include "nob.h"
 
+#include <stdio.h>
+#include <stdbool.h>
 #include <SDL.h>
 #include <cglm/cglm.h>
 
