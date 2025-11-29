@@ -1,6 +1,4 @@
 #include "1g.h"
-#include "SDL3/SDL_render.h"
-#include "SDL3/SDL_thread.h"
 
 using namespace std;
 
