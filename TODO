@@ -3,8 +3,12 @@ DONE:
 - REWRITE in c++ (11 or 17)
 - make a window
 - triangle
+- better object system
 
 TODO:
-
-- better object system
-- meshes (dynamic arrays of vertices and type etc)
+- remove utils.h
+- camera
+- namespace 1g
+- add rendering fuctions to renderer class
+- load .obj
+- textures

@@ -16,7 +16,7 @@ void set_best_renderer_driver(SDL_Window* window) {
         string name = SDL_GetRenderDriver(i);
         renderer_names.emplace(name);
 
-        //printf("%d: %s\n", i, name);
+        //cout << i << " : " << name << endl;
     }
 
     if(renderer_names.find("direct3d11") != renderer_names.end()){
@@ -29,8 +29,11 @@ void set_best_renderer_driver(SDL_Window* window) {
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
     }else if(renderer_names.find("opengl") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+    }else if(renderer_names.find("opengles2") != renderer_names.end()){
+        SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
     }else{
-        error("Couldn't find supported SDL driver!");
+        SDL_SetHint(SDL_HINT_RENDER_DRIVER, "software");
+        warning("Couldn't find supported SDL driver rendering in software mode!");
     }
 }
 
@@ -53,39 +56,17 @@ renderer_data renderer_init(Scene* scene) {
 }
 
 void renderer_update(renderer_data data){
-    GameObject* go = &data.scene->gameobjects[0];
-    Transform* transform = (Transform*)go->components[0].data;
-    Mesh* mesh = (Mesh*)go->components[1].data;
-
-    float size = 100.0f;
-    float speed = 2.0f;
-    vec3 center = {data.width / 2.0f, data.height / 2.0f, 0.0f};
-
-    vec3 p1 = { -size , -size };
-    vec3 p2 = { 0.0f  , size  };
-    vec3 p3 = { size  , -size };
-
-    float* p1r = rotate_3d_z(p1, data.time * speed);
-    float* p2r = rotate_3d_z(p2, data.time * speed);
-    float* p3r = rotate_3d_z(p3, data.time * speed);
-
-    p1r = rotate_3d_y(p1r, data.time * speed);
-    p2r = rotate_3d_y(p2r, data.time * speed);
-    p3r = rotate_3d_y(p3r, data.time * speed);
-
-    p1r = rotate_3d_x(p1r, data.time * speed);
-    p2r = rotate_3d_x(p2r, data.time * speed);
-    p3r = rotate_3d_x(p3r, data.time * speed);
-
-    mesh->vertices = (SDL_Vertex[]){
-        { { center[0] + p1r[0], center[1] + p1r[1] }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
-        { { center[0] + p2r[0], center[1] + p2r[1] }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
-        { { center[0] + p3r[0], center[1] + p3r[1] }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }
-    };
-    
     SDL_SetRenderDrawColor(data.renderer, 0, 0, 0, 255);
     SDL_RenderClear(data.renderer);
-    SDL_RenderGeometry(data.renderer, NULL, mesh->vertices, 3, NULL, 0);
+
+    for (int i = 0; i < data.scene->gameobjects.size(); i++) {
+        for (int j = 0; j < data.scene->gameobjects[i]->components.size(); j++) {
+            data.scene->gameobjects[i]->components[j]->render(&data);
+        }
+    }
+
+    SDL_SetRenderDrawColor(data.renderer, 255, 255, 255, 255);
+    SDL_RenderDebugText(data.renderer, 0, 0, ("FPS: " + to_string(data.fps)).c_str());
     SDL_RenderPresent(data.renderer);
 }
 

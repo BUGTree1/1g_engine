@@ -5,19 +5,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	Scene scene = Scene();
+	Scene* scene = new Scene({new GameObject({new Transform(),new Mesh_Renderer()})});
 
-    scene.gameobjects.push_back(GameObject());
-
-    scene.gameobjects[0].components.push_back(Component());
-    scene.gameobjects[0].components[0].type = 0;
-    scene.gameobjects[0].components[0].data = new Transform;
-
-    scene.gameobjects[0].components.push_back(Component());
-    scene.gameobjects[0].components[1].type = 1;
-    scene.gameobjects[0].components[1].data = new Mesh;
-
-	renderer_data rend_data = renderer_init(&scene);
+	renderer_data rend_data = renderer_init(scene);
 	renderer_update(rend_data);
 
     double last_time = 0;
