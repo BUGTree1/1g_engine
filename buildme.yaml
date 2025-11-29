@@ -6,15 +6,15 @@ build_type             : "executable"
 proj_name              : "1g engine"
 proj_version           : "0.1.0.0"
 file_name              : "1g"
-compiler               : "gcc"
-linker                 : "gcc"
+compiler               : "g++"
+linker                 : "g++"
 flags                  : ['-Wall','-Wextra','-O3']
 compiler_flags         : []
 linker_flags           : []
 output_dir             : "bin"
 source_dir             : "src"
 libs                   : []
-pkgconf_libs           : ["sdl2", "cglm"]
+pkgconf_libs           : ["sdl3", "cglm"]
 lib_dirs               : []
 include_dirs           : []
 run_args               : []

@@ -13,15 +13,12 @@ typedef struct {
 } Component;
 
 typedef struct {
-    dynamic_array(Component) components;
+    std::vector<Component> components;
 } GameObject;
 
 typedef struct {
-    dynamic_array(GameObject) gameobjects;
+    std::vector<GameObject> gameobjects;
 } Scene;
-
-GameObject* get_gameobject(Scene* scene, size_t idx);
-Component* get_component(GameObject* gameobject, size_t idx);
 
 // ---------------------
 //  Common components
@@ -41,10 +38,6 @@ typedef struct {
 //  Meshes
 // \/-------------------
 
-Mesh* load_mesh(const char* path);
-
-// ---------------------
-//  Meshes
-// \/-------------------
+//Mesh* load_obj(string path);
 
 #endif // __1G_H__

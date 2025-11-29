@@ -1,10 +1,10 @@
 DONE: 
-- choose rendering library (SDL2)
+- choose rendering library (SDL3)
+- REWRITE in c++ (11 or 17)
 - make a window
 - triangle
 
 TODO:
 
-- REWRITE in c++ (11 or 17)
-
+- better object system
 - meshes (dynamic arrays of vertices and type etc)

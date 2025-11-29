@@ -1,22 +1,23 @@
 #include "1g.h"
-#define NOB_IMPLEMENTATION
+#include "SDL3/SDL_events.h"
 #include "renderer.h"
 
+using namespace std;
 
 int main(int argc, char** argv) {
-	Scene* scene = (Scene*)malloc(sizeof(Scene));
+	Scene scene = Scene();
 
-    da_append(&scene->gameobjects, (GameObject){0});
+    scene.gameobjects.push_back(GameObject());
 
-    da_append(&get_gameobject(scene, 0)->components, (Component){0});
-    get_component(get_gameobject(scene, 0), 0)->type = 0;
-    get_component(get_gameobject(scene, 0), 0)->data = &(Transform){0};
+    scene.gameobjects[0].components.push_back(Component());
+    scene.gameobjects[0].components[0].type = 0;
+    scene.gameobjects[0].components[0].data = new Transform;
 
-    da_append(&get_gameobject(scene, 0)->components, (Component){0});
-    get_component(get_gameobject(scene, 0), 1)->type = 1;
-    get_component(get_gameobject(scene, 0), 1)->data = &(Mesh){0};
+    scene.gameobjects[0].components.push_back(Component());
+    scene.gameobjects[0].components[1].type = 1;
+    scene.gameobjects[0].components[1].data = new Mesh;
 
-	renderer_data rend_data = renderer_init(scene);
+	renderer_data rend_data = renderer_init(&scene);
 	renderer_update(rend_data);
 
     double last_time = 0;
@@ -26,8 +27,8 @@ int main(int argc, char** argv) {
     
     while (running) {
         while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) running = 0;
-            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) running = 0;
+            if (event.type == SDL_EVENT_QUIT) running = 0;
+            if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_ESCAPE) running = 0;
         }
 		SDL_GetWindowSizeInPixels(rend_data.window,&rend_data.width,&rend_data.height);
 

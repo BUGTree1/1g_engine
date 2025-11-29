@@ -1,33 +1,36 @@
 #include "renderer.h"
 #include "1g.h"
+#include "SDL3/SDL_render.h"
 #include "utils.h"
+
+using namespace std;
 
 void set_best_renderer_driver(SDL_Window* window) {
     //printf("Available renderers:\n");
 
     int renderers_count = SDL_GetNumRenderDrivers();
 
-    dynamic_array(const char *) renderer_names_da = {0};
+    set<string> renderer_names;
 
     for (int i = 0; i < renderers_count; i++) {
-        SDL_RendererInfo info;
-        SDL_GetRenderDriverInfo(i, &info);
+        string name = SDL_GetRenderDriver(i);
+        renderer_names.emplace(name);
 
-        da_append(&renderer_names_da, info.name);
-
-        //printf("%d: %s\n", i, info.name);
+        //printf("%d: %s\n", i, name);
     }
 
-    if(da_contains_cstr(&renderer_names_da, "direct3d11")){
+    if(renderer_names.find("direct3d11") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "direct3d11");
-    }else if(da_contains_cstr(&renderer_names_da, "direct3d12")){
+    }else if(renderer_names.find("direct3d12") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "direct3d12");
-    }else if(da_contains_cstr(&renderer_names_da, "direct3d")){
+    }else if(renderer_names.find("direct3d") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "direct3d");
-    }else if(da_contains_cstr(&renderer_names_da, "metal")){
+    }else if(renderer_names.find("metal") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
-    }else if(da_contains_cstr(&renderer_names_da, "opengl")){
+    }else if(renderer_names.find("opengl") != renderer_names.end()){
         SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+    }else{
+        error("Couldn't find supported SDL driver!");
     }
 }
 
@@ -36,11 +39,11 @@ renderer_data renderer_init(Scene* scene) {
 
     SDL_Init(SDL_INIT_VIDEO);
     
-    SDL_Window* window = SDL_CreateWindow("1G Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, data.width, data.height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    SDL_Window* window = SDL_CreateWindow("1G Engine", data.width, data.height, SDL_WINDOW_RESIZABLE);
 
     set_best_renderer_driver(window);
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
     
     data.window = window;
     data.renderer = renderer;
@@ -50,9 +53,9 @@ renderer_data renderer_init(Scene* scene) {
 }
 
 void renderer_update(renderer_data data){
-    GameObject* go = get_gameobject(data.scene, 0);
-    Transform* transform = get_component(go, 0)->data;
-    Mesh* mesh = get_component(go, 1)->data;
+    GameObject* go = &data.scene->gameobjects[0];
+    Transform* transform = (Transform*)go->components[0].data;
+    Mesh* mesh = (Mesh*)go->components[1].data;
 
     float size = 100.0f;
     float speed = 2.0f;
@@ -75,9 +78,9 @@ void renderer_update(renderer_data data){
     p3r = rotate_3d_x(p3r, data.time * speed);
 
     mesh->vertices = (SDL_Vertex[]){
-        { { center[0] + p1r[0], center[1] + p1r[1] }, { 255, 0, 0, 255 }, { 0.0f, 0.0f } },
-        { { center[0] + p2r[0], center[1] + p2r[1] }, { 0, 255, 0, 255 }, { 0.0f, 0.0f } },
-        { { center[0] + p3r[0], center[1] + p3r[1] }, { 0, 0, 255, 255 }, { 0.0f, 0.0f } }
+        { { center[0] + p1r[0], center[1] + p1r[1] }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
+        { { center[0] + p2r[0], center[1] + p2r[1] }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
+        { { center[0] + p3r[0], center[1] + p3r[1] }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }
     };
     
     SDL_SetRenderDrawColor(data.renderer, 0, 0, 0, 255);
