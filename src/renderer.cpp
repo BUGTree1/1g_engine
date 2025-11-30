@@ -4,6 +4,7 @@
 #include "utils.h"
 
 using namespace std;
+using namespace glm;
 
 void set_best_renderer_driver(SDL_Window* window) {
     //printf("Available renderers:\n");

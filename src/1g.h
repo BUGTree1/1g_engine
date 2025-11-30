@@ -60,9 +60,9 @@ struct renderer_data {
 
 class Transform : public Component {
 public:
-    vec3 position;
-    vec3 rotation;
-    vec3 scale;
+    glm::vec3 position;
+    glm::vec3 rotation;
+    glm::vec3 scale;
 };
 
 struct Mesh {

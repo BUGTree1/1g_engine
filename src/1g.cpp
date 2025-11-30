@@ -1,6 +1,7 @@
 #include "1g.h"
 
 using namespace std;
+using namespace glm;
 
 GameObject::GameObject(){
     components = vector<Component*>();
@@ -44,26 +45,30 @@ void Mesh_Renderer::render(renderer_data* data) {
     float speed = 2.0f;
     vec3 center = {data->width / 2.0f, data->height / 2.0f, 0.0f};
 
-    vec3 p1 = { -size , -size };
-    vec3 p2 = { 0.0f  , size  };
-    vec3 p3 = { size  , -size };
+    vec3 p1 = vec3( -size , -size , 0.0f);
+    vec3 p2 = vec3( 0.0f  , size  , 0.0f);
+    vec3 p3 = vec3( size  , -size , 0.0f);
 
-    float* p1r = rotate_3d_z(p1, data->time * speed);
-    float* p2r = rotate_3d_z(p2, data->time * speed);
-    float* p3r = rotate_3d_z(p3, data->time * speed);
+    mat4 rotate_x_mat = glm::rotate(mat4(1.0f), (float)data->time * speed, vec3(1.0f, 0.0f, 0.0f));
+    mat4 rotate_y_mat = glm::rotate(mat4(1.0f), (float)data->time * speed, vec3(0.0f, 1.0f, 0.0f));
+    mat4 rotate_z_mat = glm::rotate(mat4(1.0f), (float)data->time * speed, vec3(0.0f, 0.0f, 1.0f));
 
-    p1r = rotate_3d_y(p1r, data->time * speed);
-    p2r = rotate_3d_y(p2r, data->time * speed);
-    p3r = rotate_3d_y(p3r, data->time * speed);
+    p1 = vec3(rotate_x_mat * vec4(p1, 1.0f));
+    p2 = vec3(rotate_x_mat * vec4(p2, 1.0f));
+    p3 = vec3(rotate_x_mat * vec4(p3, 1.0f));
 
-    p1r = rotate_3d_x(p1r, data->time * speed);
-    p2r = rotate_3d_x(p2r, data->time * speed);
-    p3r = rotate_3d_x(p3r, data->time * speed);
+    p1 = vec3(rotate_y_mat * vec4(p1, 1.0f));
+    p2 = vec3(rotate_y_mat * vec4(p2, 1.0f));
+    p3 = vec3(rotate_y_mat * vec4(p3, 1.0f));
+
+    p1 = vec3(rotate_z_mat * vec4(p1, 1.0f));
+    p2 = vec3(rotate_z_mat * vec4(p2, 1.0f));
+    p3 = vec3(rotate_z_mat * vec4(p3, 1.0f));
 
     mesh->vertices = (vector<SDL_Vertex>){
-        { { center[0] + p1r[0], center[1] + p1r[1] }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
-        { { center[0] + p2r[0], center[1] + p2r[1] }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
-        { { center[0] + p3r[0], center[1] + p3r[1] }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }
+        { { center[0] + p1.x, center[1] + p1.y }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
+        { { center[0] + p2.x, center[1] + p2.y }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } },
+        { { center[0] + p3.x, center[1] + p3.y }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }
     };
 
     SDL_RenderGeometry(data->renderer, NULL, &mesh->vertices[0], 3, NULL, 0);

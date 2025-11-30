@@ -8,16 +8,11 @@
 #include <set>
 #include <algorithm>
 #include <SDL3/SDL.h>
-#include <cglm/cglm.h>
 
-// ---------------------
-//  3d Math
-// \/-------------------
-
-float* rotate_3d_x(vec3 p, float angle);
-float* rotate_3d_y(vec3 p, float angle);
-float* rotate_3d_z(vec3 p, float angle);
-
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/constants.hpp>
 
 // ---------------------
 //  Logging
