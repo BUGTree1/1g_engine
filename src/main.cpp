@@ -1,6 +1,5 @@
-#include "1g.h"
-#include "SDL3/SDL_events.h"
 #include "renderer.h"
+#include "common.h"
 
 using namespace std;
 

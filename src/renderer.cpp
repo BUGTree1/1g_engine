@@ -1,7 +1,5 @@
 #include "renderer.h"
-#include "1g.h"
-#include "SDL3/SDL_render.h"
-#include "utils.h"
+#include "log.h"
 
 using namespace std;
 using namespace glm;

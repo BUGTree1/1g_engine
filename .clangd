@@ -1,3 +1,5 @@
 CompileFlags:
   Add:
     - "-I/home/szyme/vcpkg/installed/x64-linux/lib/pkgconfig/../../include"
+Diagnostics:
+  UnusedIncludes: None

@@ -1,7 +1,7 @@
 #ifndef __1G_H__
 #define __1G_H__
 
-#include "utils.h"
+#include "common.h"
 
 // ---------------------
 //  Common types
