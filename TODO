@@ -8,6 +8,8 @@ DONE:
 - namespace 1g
 
 TODO:
+- ANOTHER rendering library (SDL3 without SDL_gpu doesent support full 3d)
+
 - camera
 - add rendering fuctions to renderer class
 - load .obj

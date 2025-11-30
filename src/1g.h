@@ -28,7 +28,6 @@ public:
     GameObject();
     GameObject(std::vector<Component*> comps);
 
-    void add_component(Component comp);
     void add_component(Component* comp);
 };
 
@@ -38,7 +37,6 @@ public:
     Scene();
     Scene(std::vector<GameObject*> gos);
 
-    void add_gameobject(GameObject go);
     void add_gameobject(GameObject* go);
 };
 

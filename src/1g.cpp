@@ -11,9 +11,7 @@ GameObject::GameObject(){
 GameObject::GameObject(std::vector<Component*> comps){
     components = comps;
 }
-void GameObject::add_component(Component comp){
-    components.push_back(&comp);
-}
+
 void GameObject::add_component(Component* comp){
     components.push_back(comp);
 }
@@ -24,9 +22,7 @@ Scene::Scene(){
 Scene::Scene(std::vector<GameObject*> gos){
     gameobjects = gos;
 }
-void Scene::add_gameobject(GameObject go){
-    gameobjects.push_back(&go);
-}
+
 void Scene::add_gameobject(GameObject* go){
     gameobjects.push_back(go);
 }
