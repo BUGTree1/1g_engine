@@ -4,6 +4,8 @@
 using namespace std;
 using namespace glm;
 
+namespace e1g {
+
 void set_best_renderer_driver(SDL_Window* window) {
     //printf("Available renderers:\n");
 
@@ -73,4 +75,6 @@ void renderer_end(renderer_data data){
     SDL_DestroyRenderer(data.renderer);
     SDL_DestroyWindow(data.window);
     SDL_Quit();
+}
+
 }

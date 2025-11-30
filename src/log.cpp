@@ -3,6 +3,8 @@
 using namespace std;
 using namespace glm;
 
+namespace e1g {
+
 // ---------------------
 //  Logging
 // \/-------------------
@@ -19,4 +21,6 @@ void warning(string msg){
 void todo(string msg){
     cout << "TODO: " << msg << endl;
     exit(1);
+}
+
 }

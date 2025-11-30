@@ -2,6 +2,8 @@
 #include "common.h"
 
 using namespace std;
+using namespace glm;
+using namespace e1g;
 
 int main(int argc, char** argv) {
 	Scene* scene = new Scene({new GameObject({new Transform(),new Mesh_Renderer()})});

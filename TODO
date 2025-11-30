@@ -4,11 +4,11 @@ DONE:
 - make a window
 - triangle
 - better object system
+- remove utils.h
+- namespace 1g
 
 TODO:
-- remove utils.h
 - camera
-- namespace 1g
 - add rendering fuctions to renderer class
 - load .obj
 - textures

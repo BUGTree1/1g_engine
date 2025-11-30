@@ -1,5 +1,7 @@
 #include "1g.h"
 
+namespace e1g {
+
 using namespace std;
 using namespace glm;
 
@@ -72,4 +74,6 @@ void Mesh_Renderer::render(renderer_data* data) {
     };
 
     SDL_RenderGeometry(data->renderer, NULL, &mesh->vertices[0], 3, NULL, 0);
+}
+
 }

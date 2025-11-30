@@ -4,6 +4,8 @@
 
 #include "common.h"
 
+namespace e1g {
+
 // ---------------------
 //  Logging
 // \/-------------------
@@ -11,5 +13,7 @@
 void error(std::string msg);
 void warning(std::string msg);
 void todo(std::string msg);
+
+}
 
 #endif //__LOG_H__

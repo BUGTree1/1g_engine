@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+namespace e1g {
+
 // ---------------------
 //  Common types
 // \/-------------------
@@ -82,5 +84,7 @@ public:
 // \/-------------------
 
 //Mesh* load_obj(string path);
+
+}
 
 #endif // __1G_H__
