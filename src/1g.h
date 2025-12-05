@@ -24,8 +24,9 @@ struct Render_Data {
     double delta_time;
     double time;
 
-    GLuint vertex_array;
-    GLuint vertex_buffer;
+    GLuint vao;
+    GLuint vbo;
+    GLuint ebo;
 };
 
 class GameObject;

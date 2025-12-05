@@ -76,10 +76,10 @@ void Mesh_Renderer::render(Render_Data* data) {
         { {center[0] + p3.x, center[1] + p3.y, 0.0f}, {0.0f, 0.0f, 1.0f} }
     };
 
-    //glBindVertexArray(data->vertex_array);
+    //glBindVertexArray(data->vao);
     //glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), &mesh->vertices[0], GL_DYNAMIC_DRAW);
 
-    glBindVertexArray(data->vertex_array);
+    glBindVertexArray(data->vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 

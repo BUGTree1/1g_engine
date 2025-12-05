@@ -9,6 +9,9 @@ DONE:
 - ANOTHER rendering library (GLFW + GLAD (only OpenGL 4.6))
 
 TODO:
+
+- figure out EBO https://github.com/HanaDigital/OpenGL-Quickstart-Template
+
 - camera
 - add rendering fuctions to renderer class
 - load .obj

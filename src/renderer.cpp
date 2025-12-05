@@ -22,14 +22,15 @@ void glfw_window_size_cb(GLFWwindow* window, int width, int height) {
 void validate_shader(GLuint shader) {
     int len = 0;
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
-    
-    if(len > 0) {
+    int success = 0;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if(!success) {
         string info;
         info.resize(len);
 
         glGetShaderInfoLog(shader, len, NULL, &info[0]);
         
-        error(info);
+        error("SHADER: " + info);
     }
 }
 
@@ -55,17 +56,7 @@ void Renderer::init(Scene* scene) {
 
     glfwMakeContextCurrent(data->window);
 
-    gladLoadGL();
-
-    glGenBuffers(1, &data->vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, data->vertex_buffer);
-    vec3 p1 = vec3( -100.0f , -100.0f , 0.0f);
-    vec3 p2 = vec3( 0.0f    , 100.0f  , 0.0f);
-    vec3 p3 = vec3( 100.0f  , -100.0f , 0.0f);
-    glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), new Vertex[3]{
-        {p1, {1.0f, 0.0f, 0.0f}},
-        {p2, {0.0f, 1.0f, 0.0f}},
-        {p3, {0.0f, 0.0f, 1.0f}}}, GL_DYNAMIC_DRAW);
+    errorz(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Can't initialize GLAD!");
  
     const GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
@@ -77,7 +68,6 @@ void Renderer::init(Scene* scene) {
     glCompileShader(fragment_shader);
     validate_shader(fragment_shader);
     
- 
     const GLuint program = glCreateProgram();
     glAttachShader(program, vertex_shader);
     glAttachShader(program, fragment_shader);
@@ -86,12 +76,30 @@ void Renderer::init(Scene* scene) {
     const GLint vpos_location = glGetAttribLocation(program, "vPos");
     const GLint vcol_location = glGetAttribLocation(program, "vCol");
 
-    glGenVertexArrays(1, &data->vertex_array);
-    glBindVertexArray(data->vertex_array);
+    glGenVertexArrays(1, &data->vao);
+    glBindVertexArray(data->vao);
+
+    glGenBuffers(1, &data->vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, data->vbo);
+    Vertex vertices[] = {
+        {vec3( -100.0f , -100.0f , 0.0f), vec3(1.0f, 0.0f, 0.0f)},
+        {vec3( 0.0f    , 100.0f  , 0.0f), vec3(0.0f, 1.0f, 0.0f)},
+        {vec3( 100.0f  , -100.0f , 0.0f), vec3(0.0f, 0.0f, 1.0f)}
+    };
+    GLuint indices[] = {
+		0, 1, 2
+	};
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+    // TODO: figure out EBO https://github.com/HanaDigital/OpenGL-Quickstart-Template
+    //glGenBuffers(1, &data->ebo);
+    //glVertexArrayElementBuffer(data->vao, data->ebo);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+
     glEnableVertexAttribArray(vpos_location);
-    glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, 0, (void*) offsetof(Vertex, pos));
+    glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, pos));
     glEnableVertexAttribArray(vcol_location);
-    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, 0, (void*) offsetof(Vertex, col));
+    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, col));
 }
 
 void Renderer::update(){
