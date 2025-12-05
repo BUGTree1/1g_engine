@@ -89,9 +89,9 @@ void Renderer::init(Scene* scene) {
     glGenVertexArrays(1, &data->vertex_array);
     glBindVertexArray(data->vertex_array);
     glEnableVertexAttribArray(vpos_location);
-    glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, pos));
+    glVertexAttribPointer(vpos_location, 3, GL_FLOAT, GL_FALSE, 0, (void*) offsetof(Vertex, pos));
     glEnableVertexAttribArray(vcol_location);
-    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, col));
+    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE, 0, (void*) offsetof(Vertex, col));
 }
 
 void Renderer::update(){
