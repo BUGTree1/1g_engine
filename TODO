@@ -6,10 +6,9 @@ DONE:
 - better object system
 - remove utils.h
 - namespace 1g
+- ANOTHER rendering library (GLFW + GLAD (only OpenGL 4.6))
 
 TODO:
-- ANOTHER rendering library (SDL3 without SDL_gpu doesent support full 3d)
-
 - camera
 - add rendering fuctions to renderer class
 - load .obj

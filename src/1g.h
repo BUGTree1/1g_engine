@@ -9,17 +9,35 @@ namespace e1g {
 //  Common types
 // \/-------------------
 
-struct renderer_data;
-struct GameObject;
+struct Vertex {
+    glm::vec3 pos;
+    glm::vec3 col;
+};
+
+struct Render_Data {
+    GLFWwindow* window;
+
+    int width;
+    int height;
+
+    double fps;
+    double delta_time;
+    double time;
+
+    GLuint vertex_array;
+    GLuint vertex_buffer;
+};
+
+class GameObject;
 
 class Component {
 public:
     GameObject* gameobject;
-    virtual void update(renderer_data* data) {};
-    virtual void render(renderer_data* data) {};
+    virtual void update() {};
+    virtual void render(Render_Data* data) {};
 };
 
-struct Scene;
+class Scene;
 
 class GameObject {
 public:
@@ -40,20 +58,6 @@ public:
     void add_gameobject(GameObject* go);
 };
 
-struct renderer_data {
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-
-    int width;
-    int height;
-
-    double fps;
-    double delta_time;
-    double time;
-
-    Scene* scene;
-};
-
 // ---------------------
 //  Common components
 // \/-------------------
@@ -66,7 +70,7 @@ public:
 };
 
 struct Mesh {
-    std::vector<SDL_Vertex> vertices;
+    std::vector<Vertex> vertices;
 };
 
 class Mesh_Renderer : public Component {
@@ -74,7 +78,7 @@ public:
     Mesh_Renderer();
     
     Mesh* mesh;
-    void render(renderer_data* data) override;
+    void render(Render_Data* data) override;
 };
 
 // ---------------------

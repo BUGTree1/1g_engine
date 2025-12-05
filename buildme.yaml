@@ -13,8 +13,8 @@ compiler_flags         : []
 linker_flags           : []
 output_dir             : "bin"
 source_dir             : "src"
-libs                   : []
-pkgconf_libs           : ["sdl3", "glm"]
+libs                   : ["glad"]
+pkgconf_libs           : ["glfw3", "glm"]
 lib_dirs               : []
 include_dirs           : []
 run_args               : []

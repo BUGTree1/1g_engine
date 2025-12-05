@@ -10,7 +10,7 @@ namespace e1g {
 //  Logging
 // \/-------------------
 
-void error(std::string msg);
+void error(std::string msg, int error_code = 1);
 void warning(std::string msg);
 void todo(std::string msg);
 

@@ -9,9 +9,9 @@ namespace e1g {
 //  Logging
 // \/-------------------
 
-void error(string msg){
+void error(string msg, int error_code){
     cout << "ERROR: " << msg << endl;
-    exit(1);
+    exit(error_code);
 }
 
 void warning(string msg){

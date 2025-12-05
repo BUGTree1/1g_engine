@@ -7,7 +7,8 @@
 #include <string>
 #include <set>
 #include <algorithm>
-#include <SDL3/SDL.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>

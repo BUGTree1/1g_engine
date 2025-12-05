@@ -6,9 +6,15 @@
 
 namespace e1g {
 
-renderer_data renderer_init(Scene* scene);
-void renderer_update(renderer_data data);
-void renderer_end(renderer_data data);
+class Renderer {
+public:
+    Render_Data* data;
+    Scene* scene;
+
+    void init(Scene* scene);
+    void update();
+    void end();
+};
 
 }
 
