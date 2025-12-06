@@ -8,7 +8,7 @@ proj_version           : "0.1.0.0"
 file_name              : "1g"
 compiler               : "g++"
 linker                 : "g++"
-flags                  : ['-Wall','-Wextra','-O3']
+flags                  : ['-Wall','-Wextra','-O3','-flto','-march=native']
 compiler_flags         : []
 linker_flags           : []
 output_dir             : "bin"
