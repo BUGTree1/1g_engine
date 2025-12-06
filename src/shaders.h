@@ -9,10 +9,13 @@ R"MS(
 #version 460 core
 in vec3 vCol;
 in vec3 vPos;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 out vec3 color;
 void main()
 {
-    gl_Position = vec4(vPos, 1.0);
+    gl_Position = proj * view * model * vec4(vPos, 1.0);
     color = vCol;
 }
 )MS";

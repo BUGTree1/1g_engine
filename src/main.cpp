@@ -13,7 +13,10 @@ int main(int argc, char** argv) {
 
     double last_time = 0;
     double current_time = 0;
-	int running = 1;
+
+	dvec2 last_mouse_pos = dvec2(0.0f);
+	glfwGetCursorPos(rend.data->window, &last_mouse_pos.x, &last_mouse_pos.y);
+	rend.data->cam_pos = vec3(0.0f,0.0f,-5.0f);
     
     while (!glfwWindowShouldClose(rend.data->window)) {
         current_time = glfwGetTime();
@@ -24,9 +27,15 @@ int main(int argc, char** argv) {
 
 		glfwPollEvents();
 
+		//cout << "FPS: " << to_string(rend.data->fps) << endl;
+
 		if(glfwGetKey(rend.data->window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
 			glfwSetWindowShouldClose(rend.data->window, true);
 		}
+
+    	glfwGetCursorPos(rend.data->window, &rend.data->mouse_pos.x, &rend.data->mouse_pos.y);
+		rend.data->mouse_vel = rend.data->mouse_pos - last_mouse_pos;
+		last_mouse_pos = rend.data->mouse_pos;
 
 		rend.update();
     }

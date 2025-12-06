@@ -7,11 +7,9 @@ DONE:
 - remove utils.h
 - namespace 1g
 - ANOTHER rendering library (GLFW + GLAD (only OpenGL 4.6))
-
-TODO:
-
 - figure out EBO https://github.com/HanaDigital/OpenGL-Quickstart-Template
 
+TODO:
 - camera
 - add rendering fuctions to renderer class
 - load .obj

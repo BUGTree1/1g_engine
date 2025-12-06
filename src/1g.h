@@ -17,16 +17,32 @@ struct Vertex {
 struct Render_Data {
     GLFWwindow* window;
 
-    int width;
-    int height;
+    glm::ivec2 window_pos;
+    glm::ivec2 window_size;
+    glm::vec2 window_scale;
+    float window_aspect_ratio;
+    glm::ivec2 monitor_pos;
+    glm::ivec2 monitor_size;
+    float monitor_aspect_ratio;
 
     double fps;
     double delta_time;
     double time;
 
+    glm::dvec2 mouse_pos;
+    glm::dvec2 mouse_vel;
+
+    glm::vec3 cam_rot;
+    glm::vec3 cam_pos;
+
     GLuint vao;
     GLuint vbo;
     GLuint ebo;
+    GLuint program;
+
+    GLint model_loc;
+    GLint view_loc;
+    GLint proj_loc;
 };
 
 class GameObject;
