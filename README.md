@@ -1,5 +1,5 @@
 <p align="center">
-<img src="assets/1G_Engine.png" alt="drawing" width="200"/>
+<img src="assets/1G_Engine.png" alt="icon" width="200"/>
 </p>
 
 > [!CAUTION]

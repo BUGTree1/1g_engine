@@ -12,5 +12,8 @@ DONE:
 TODO:
 - camera component
 - add rendering fuctions to renderer class
+- UI and separation between the Engine and the Editor
 - load .obj
 - textures
+
+- Shader support with OpenCL or HLSL compiling to GLSL or SPIRV....
