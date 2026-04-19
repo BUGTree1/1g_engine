@@ -10,6 +10,32 @@ DONE:
 - figure out EBO https://github.com/HanaDigital/OpenGL-Quickstart-Template
 
 TODO:
+
+PseudoECS:
+
+struct GameObject {
+    UnorderedVector<Component> components
+}
+struct Component {
+    void* data
+    void (*init)()
+    void (*deinit)()
+    void (*update)(double)
+    void (*render)()
+}
+// Maybe by pointer?
+Component new_example_component() {
+    Component comp = Component{0};
+    comp.data = malloc(sizeof(example_component_data))
+    comp.init = example_component_init;
+    comp.deinit = example_component_deinit;
+    comp.update = example_component_update;
+    comp.render = example_component_render;
+    // Maybe call comp.init?
+    return comp;
+}
+
+- back to Good Old C
 - camera component
 - add rendering fuctions to renderer class
 - UI and separation between the Engine and the Editor
